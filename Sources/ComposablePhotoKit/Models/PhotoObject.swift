@@ -15,12 +15,13 @@ public struct PhotoObject: Equatable {
 
     public var localIdentifier: String
 
-    public init(PhotoObject: PHObject) {
-        self.rawValue = nil
-        self.localIdentifier = PhotoObject.localIdentifier
-    }
+    public init(rawValue: PHObject) {
+        self.rawValue = rawValue
+        self.localIdentifier = rawValue.localIdentifier
 
-    public init(localIdentifier: String){
+
+    }
+    public init(localIdentifier: String) {
         self.rawValue = nil
         self.localIdentifier = localIdentifier
     }
