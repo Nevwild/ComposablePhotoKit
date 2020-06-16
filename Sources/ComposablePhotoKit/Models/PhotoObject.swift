@@ -1,13 +1,7 @@
-//
-//  PhotoObject.swift
-//  RecollMobile
-//
-//  Created by Nevill Wilder on 6/15/20.
-//  Copyright © 2020 NevWild. All rights reserved.
-//
-
 import Photos
 
+/// A value type wrapper for `PHObject`. This type is necessary so that we can do equality checks
+/// and write tests against its values.
 
 public struct PhotoObject: Equatable {
 
@@ -18,9 +12,8 @@ public struct PhotoObject: Equatable {
     public init(rawValue: PHObject) {
         self.rawValue = rawValue
         self.localIdentifier = rawValue.localIdentifier
-
-
     }
+
     public init(localIdentifier: String) {
         self.rawValue = nil
         self.localIdentifier = localIdentifier
