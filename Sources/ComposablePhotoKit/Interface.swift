@@ -33,6 +33,10 @@ public struct PhotoLibrary {
         _unimplemented("authorizationStatus")
     }
 
+    var create: (AnyHashable) -> Effect<Action, Never> = { _ in _unimplemented("create") }
+
+     var destroy: (AnyHashable) -> Effect<Never, Never> = { _ in _unimplemented("destroy") }
+
     var requestAuthorization: (AnyHashable) -> Effect<Never, Never> = { _ in
         _unimplemented("requestAuthorization")
     }
@@ -52,6 +56,13 @@ public struct PhotoLibrary {
         self.requestAuthorization(id)
     }
 
+    public func create(id: AnyHashable) -> Effect<Action, Never> {
+      self.create(id)
+    }
+    
+    public func destroy(id: AnyHashable) -> Effect<Never, Never> {
+      self.destroy(id)
+    }
 
 }
 
