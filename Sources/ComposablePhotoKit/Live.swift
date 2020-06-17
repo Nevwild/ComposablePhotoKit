@@ -6,4 +6,17 @@
 //  Copyright © 2020 NevWild. All rights reserved.
 //
 
-import Foundation
+import ComposableArchitecture
+import Photos
+
+
+extension PhotoLibrary {
+
+    public static let live: PhotoLibrary = {
+
+        var library = PhotoLibrary()
+
+        library.authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        library
+    }()
+}
