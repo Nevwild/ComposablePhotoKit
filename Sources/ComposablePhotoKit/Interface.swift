@@ -15,12 +15,14 @@ import PhotosUI
 
 public struct PhotoLibrary {
 
-    var sharedPhotoLibrary:PHPhotoLibrary =  {_ in PHPhotoLibrary.shared()}
+    var sharedPhotoLibrary:PHPhotoLibrary {PHPhotoLibrary.shared()}
 
     public enum Action : Equatable {
+        // TODO: These are both coming from seperate protocols. Should they be represented by different action enums?
         case photoLibraryDidChange(PHChange)
-        case photoLibraryDidBecomeUnavailable
+        case photoLibraryDidBecomeUnavailable(PHPhotoLibrary)
     }
+
     public struct Error: Swift.Error, Equatable {
         public let error: NSError
 
@@ -37,19 +39,23 @@ public struct PhotoLibrary {
 
      var destroy: (AnyHashable) -> Effect<Never, Never> = { _ in _unimplemented("destroy") }
 
+    
+    // TODO:
     var requestAuthorization: (AnyHashable) -> Effect<Never, Never> = { _ in
         _unimplemented("requestAuthorization")
     }
 
-    // TODO: confirm this is the right way to implement this
-    var unavailabilityReason: Error = {_ in _unimplemented("requestAuthorization")}
+    // TODO: figure out the right way to implement this
+    // var unavailabilityReason: Error
 
+    // TODO:
     var registerAvailabilityObserver: (AnyHashable) -> Effect<Never,Never> = {_ in _unimplemented("registerAvailabilityObserver")}
-
+    // TODO:
     var unregisterAvailabilityObserver: (AnyHashable) -> Effect<Never,Never> = {_ in _unimplemented("unregisterAvailabilityObserver")}
 
+    // TODO:
     var registerChangeObserver: (AnyHashable) -> Effect<Never, Never> = {_ in _unimplemented("registerChangeObserver")}
-
+    // TODO:
     var unregisterChangeObserver: (AnyHashable) -> Effect<Never, Never> = {_ in _unimplemented("unregisterChangeObserver")}
 
     public func requestAuthorization(id: AnyHashable) -> Effect<Never, Never> {
