@@ -42,6 +42,17 @@ private class PhotoLibraryAvailabilityObserver: NSObject, PHPhotoLibraryAvailabi
     }
 }
 
-        library
-    }()
+private class PhotoLibraryChangeObserver: NSObject, PHPhotoLibraryChangeObserver {
+
+    let subscriber: Effect<PhotoLibrary.Action, Never>.Subscriber
+
+    init(_ subscriber: Effect<PhotoLibrary.Action, Never>.Subscriber) {
+        self.subscriber = subscriber
+    }
+
+    // TODO: create PhotoChange value type for this subscription
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        subscriber.send(.photoLibraryDidChange(changeInstance))
+    }
 }
+
