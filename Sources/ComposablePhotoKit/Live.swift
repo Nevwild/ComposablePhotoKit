@@ -17,9 +17,21 @@ extension PhotoLibrary {
         var library = PhotoLibrary()
 
         library.authorizationStatus = PHPhotoLibrary.authorizationStatus()
+
+        // TODO: build out create
         library.create { id in
             Effect.run { subscriber in
                 let library = library.sharedPhotoLibrary
+            }
+        }
+        // TODO: build out destroy
+        library.destroy {id in
+            .fireAndForget {
+
+            }
+        }
+    }()
+}
 private struct Dependencies {
   let libraryChangeObserver: PhotoLibraryChangeObserver
   let availabilityObserver: PhotoLibraryAvailabilityObserver
