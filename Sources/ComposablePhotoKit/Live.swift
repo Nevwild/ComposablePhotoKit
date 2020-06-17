@@ -28,11 +28,19 @@ private struct Dependencies {
 
 private var dependencies: [AnyHashable: Dependencies] = [:]
 
-                
+private class PhotoLibraryAvailabilityObserver: NSObject, PHPhotoLibraryAvailabilityObserver {
 
-            }
+    let subscriber: Effect<PhotoLibrary.Action, Never>.Subscriber
 
-        }
+    init(_ subscriber: Effect<PhotoLibrary.Action, Never>.Subscriber) {
+        self.subscriber = subscriber
+    }
+
+    // TODO:figure out if i need to wrap the photolibrary in a value type
+    func photoLibraryDidBecomeUnavailable(_ photoLibrary: PHPhotoLibrary) {
+        subscriber.send(.photoLibraryDidBecomeUnavailable(photoLibrary))
+    }
+}
 
         library
     }()
