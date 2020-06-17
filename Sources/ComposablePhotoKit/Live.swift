@@ -20,6 +20,14 @@ extension PhotoLibrary {
         library.create { id in
             Effect.run { subscriber in
                 let library = library.sharedPhotoLibrary
+private struct Dependencies {
+  let libraryChangeObserver: PhotoLibraryChangeObserver
+  let availabilityObserver: PhotoLibraryAvailabilityObserver
+  let subscriber: Effect<PhotoLibrary.Action, Never>.Subscriber
+}
+
+private var dependencies: [AnyHashable: Dependencies] = [:]
+
                 
 
             }
