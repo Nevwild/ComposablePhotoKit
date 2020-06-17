@@ -17,6 +17,15 @@ extension PhotoLibrary {
         var library = PhotoLibrary()
 
         library.authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        library.create { id in
+            Effect.run { subscriber in
+                let library = library.sharedPhotoLibrary
+                
+
+            }
+
+        }
+
         library
     }()
 }
