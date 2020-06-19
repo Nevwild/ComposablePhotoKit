@@ -33,9 +33,10 @@ extension PhotoLibrary {
     }()
 }
 private struct Dependencies {
-  let libraryChangeObserver: PhotoLibraryChangeObserver
-  let availabilityObserver: PhotoLibraryAvailabilityObserver
-  let subscriber: Effect<PhotoLibrary.Action, Never>.Subscriber
+    let library: PHPhotoLibrary
+    let libraryChangeObserver: PhotoLibraryChangeObserver
+    let availabilityObserver: PhotoLibraryAvailabilityObserver
+    let subscriber: Effect<PhotoLibrary.Action, Never>.Subscriber
 }
 
 private var dependencies: [AnyHashable: Dependencies] = [:]
