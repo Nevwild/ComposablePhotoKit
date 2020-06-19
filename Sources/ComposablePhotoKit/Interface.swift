@@ -45,9 +45,7 @@ public struct PhotoLibrary {
         _unimplemented("requestAuthorization")
     }
 
-    // TODO: figure out the right way to implement this
     // var unavailabilityReason: Error
-
     // TODO:
     var registerAvailabilityObserver: (AnyHashable) -> Effect<Never,Never> = {_ in _unimplemented("registerAvailabilityObserver")}
     // TODO:
@@ -70,9 +68,10 @@ public struct PhotoLibrary {
       self.destroy(id)
     }
 
+    var set: (AnyHashable, Properties) -> Effect<Never, Never> = { _, _ in _unimplemented("set") }
 }
 
-
+extension PhotoLibrary {
 
 // MARK: PHPhotoLibrary OBJC Header
 
