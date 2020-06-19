@@ -12,7 +12,7 @@ import Photos
 
 extension PhotoLibrary {
 
-    public static let live: PhotoLibrary = {
+    public static let live: PhotoLibrary = { () -> PhotoLibrary in
 
         var library = PhotoLibrary()
 
