@@ -38,9 +38,10 @@ extension PhotoLibrary {
             }
         }
         // TODO: build out destroy
-        library.destroy {id in
+        library.destroy { id in
             .fireAndForget {
-
+                dependencies[id]?.subscriber.send(completion: .finished)
+                dependencies[id] = nil
             }
         }
     }()
