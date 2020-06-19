@@ -22,6 +22,19 @@ extension PhotoLibrary {
         library.create { id in
             Effect.run { subscriber in
                 let library = library.sharedPhotoLibrary
+                var availabilityObserver = PhotoLibraryChangeObserver()
+                library.register(availabilityObserver)
+                var changeObserver = PhotoLibraryChangeObserver()
+                library.register(changeObserver)
+
+                dependencies[id] = Dependencies(libary: PHPhotoLibrary.shared(),
+                                                libraryChangeObserver: changeObserver,
+                                                availabilityObserver: availabilityObserver,
+                                                subscriber: subscriber)
+
+                return AnyCancellable {
+                    dependencies[id] = nil
+                }
             }
         }
         // TODO: build out destroy
