@@ -27,10 +27,11 @@ extension PhotoLibrary {
                 var changeObserver = PhotoLibraryChangeObserver()
                 library.register(changeObserver)
 
-                dependencies[id] = Dependencies(libary: PHPhotoLibrary.shared(),
-                                                libraryChangeObserver: changeObserver,
-                                                availabilityObserver: availabilityObserver,
-                                                subscriber: subscriber)
+                dependencies[id] = Dependencies(
+                    libary: PHPhotoLibrary.shared(),
+                    libraryChangeObserver: changeObserver,
+                    availabilityObserver: availabilityObserver,
+                    subscriber: subscriber)
 
                 return AnyCancellable {
                     dependencies[id] = nil
