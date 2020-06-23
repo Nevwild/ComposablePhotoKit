@@ -68,19 +68,19 @@ public struct PhotoLibrary {
       self.destroy(id)
     }
 
-    var set: (AnyHashable, Properties) -> Effect<Never, Never> = { _, _ in _unimplemented("set") }
+    var set: (AnyHashable, Properties) -> Effect<Never, Never> = { _, _ in _unimplemented("set")
 }
 
 extension PhotoLibrary {
 
 // MARK: PHPhotoLibrary OBJC Header
 
-/*
- //
- //  PHPhotoLibrary.h
- //  Photos
- //
- //  Copyright (c) 2013 Apple Inc. All rights reserved.
+extension PhotoLibrary {
+    public struct Properties:Equatable{
+        var unavailabilityReason: Error? = nil
+    }
+}
+`
  //
 
  #import <Foundation/Foundation.h>
