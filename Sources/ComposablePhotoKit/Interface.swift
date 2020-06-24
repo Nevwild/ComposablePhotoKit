@@ -73,6 +73,9 @@ public struct PhotoLibrary {
         self.requestAuthorization(id)
     }
 
+
+}
+
 extension PhotoLibrary {
     public struct Properties:Equatable{
         var unavailabilityReason: Error? = nil
