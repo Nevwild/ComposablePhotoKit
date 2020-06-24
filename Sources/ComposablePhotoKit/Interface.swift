@@ -42,21 +42,6 @@ public struct PhotoLibrary {
         _unimplemented("requestAuthorization")
     }
 
-
-    // TODO:
-    var registerChangeObserver: (AnyHashable) -> Effect<Never, Never> = {_ in _unimplemented("registerChangeObserver")
-    }
-    // TODO:
-    var unregisterChangeObserver: (AnyHashable) -> Effect<Never, Never> = {_ in _unimplemented("unregisterChangeObserver")
-    }
-
-    var registerAvailabilityObserver: (AnyHashable) -> Effect<Never, Never> = { _ in _unimplemented("registerChangeObserver")
-    }
-
-    var unregisterAvailabilityObserver: (AnyHashable) -> Effect<Never, Never> = { _ in
-        _unimplemented("unregisterAvailabilityObserver")
-    }
-
     public func create(id: AnyHashable) -> Effect<Action, Never> {
         self.create(id)
     }
@@ -71,22 +56,6 @@ public struct PhotoLibrary {
     public func requestAuthorization(id: AnyHashable) -> Effect<Never, Never> {
         self.requestAuthorization(id)
     }
-
-    public func registerAvailabilityObserver(id: AnyHashable) -> Effect<Never, Never> {
-        self.registerAvailabilityObserver(id)
-    }
-    public func unregisterAvailabilityObserver(id: AnyHashable) -> Effect<Never, Never> {
-        self.unregisterAvailabilityObserver(id)
-    }
-
-    public func registerChangeObserver(id: AnyHashable) -> Effect<Never, Never> {
-        self.registerChangeObserver(id)
-    }
-    public func unregisterChangeObserver(id: AnyHashable) -> Effect<Never, Never> {
-        self.unregisterAvailabilityObserver(id)
-    }
-
-
 }
 
 extension PhotoLibrary {
