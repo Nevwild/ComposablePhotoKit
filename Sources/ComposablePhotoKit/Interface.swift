@@ -15,8 +15,6 @@ import PhotosUI
 
 public struct PhotoLibrary {
 
-    var sharedPhotoLibrary:PHPhotoLibrary {PHPhotoLibrary.shared()}
-
     public enum Action : Equatable {
         // TODO: These are both coming from seperate protocols. Should they be represented by different action enums?
         case photoLibraryDidChange(PHChange)
