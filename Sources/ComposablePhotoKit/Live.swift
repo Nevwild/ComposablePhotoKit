@@ -22,14 +22,16 @@ extension PhotoLibrary {
         library.create = { id in
         library.create { id in
             Effect.run { subscriber in
-                let library = library.sharedPhotoLibrary
-                var availabilityObserver = PhotoLibraryChangeObserver()
-                library.register(availabilityObserver)
-                var changeObserver = PhotoLibraryChangeObserver()
-                library.register(changeObserver)
+                let sharedLibrary = PHPhotoLibrary.shared
+
+                var availabilityObserver = PhotoLibraryAvailabilityObserver(subscriber)
+                sharedLibrary().register(availabilityObserver)
+
+                var changeObserver = PhotoLibraryChangeObserver(subscriber)
+                sharedLibrary().register(changeObserver)
 
                 dependencies[id] = Dependencies(
-                    libary: PHPhotoLibrary.shared(),
+                    library: sharedLibrary(),
                     libraryChangeObserver: changeObserver,
                     availabilityObserver: availabilityObserver,
                     subscriber: subscriber)
