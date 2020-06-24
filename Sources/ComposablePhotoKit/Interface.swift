@@ -45,19 +45,19 @@ public struct PhotoLibrary {
         _unimplemented("requestAuthorization")
     }
 
-    // var unavailabilityReason: Error
-    // TODO:
-    var registerAvailabilityObserver: (AnyHashable) -> Effect<Never,Never> = {_ in _unimplemented("registerAvailabilityObserver")}
-    // TODO:
-    var unregisterAvailabilityObserver: (AnyHashable) -> Effect<Never,Never> = {_ in _unimplemented("unregisterAvailabilityObserver")}
 
     // TODO:
-    var registerChangeObserver: (AnyHashable) -> Effect<Never, Never> = {_ in _unimplemented("registerChangeObserver")}
+    var registerChangeObserver: (AnyHashable) -> Effect<Never, Never> = {_ in _unimplemented("registerChangeObserver")
+    }
     // TODO:
-    var unregisterChangeObserver: (AnyHashable) -> Effect<Never, Never> = {_ in _unimplemented("unregisterChangeObserver")}
+    var unregisterChangeObserver: (AnyHashable) -> Effect<Never, Never> = {_ in _unimplemented("unregisterChangeObserver")
+    }
 
-    public func requestAuthorization(id: AnyHashable) -> Effect<Never, Never> {
-        self.requestAuthorization(id)
+    var registerAvailabilityObserver: (AnyHashable) -> Effect<Never, Never> = { _ in _unimplemented("registerChangeObserver")
+    }
+
+    var unregisterAvailabilityObserver: (AnyHashable) -> Effect<Never, Never> = { _ in
+        _unimplemented("unregisterAvailabilityObserver")
     }
 
     public func create(id: AnyHashable) -> Effect<Action, Never> {
@@ -70,10 +70,24 @@ public struct PhotoLibrary {
 
     var set: (AnyHashable, Properties) -> Effect<Never, Never> = { _, _ in _unimplemented("set")
 }
+    
+    public func requestAuthorization(id: AnyHashable) -> Effect<Never, Never> {
+        self.requestAuthorization(id)
+    }
 
-extension PhotoLibrary {
+    public func registerAvailabilityObserver(id: AnyHashable) -> Effect<Never, Never> {
+        self.registerAvailabilityObserver(id)
+    }
+    public func unregisterAvailabilityObserver(id: AnyHashable) -> Effect<Never, Never> {
+        self.unregisterAvailabilityObserver(id)
+    }
 
-// MARK: PHPhotoLibrary OBJC Header
+    public func registerChangeObserver(id: AnyHashable) -> Effect<Never, Never> {
+        self.registerChangeObserver(id)
+    }
+    public func unregisterChangeObserver(id: AnyHashable) -> Effect<Never, Never> {
+        self.unregisterAvailabilityObserver(id)
+    }
 
 extension PhotoLibrary {
     public struct Properties:Equatable{
