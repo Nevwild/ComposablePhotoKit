@@ -56,6 +56,17 @@ public struct PhotoLibrary {
     public func requestAuthorization(id: AnyHashable) -> Effect<Never, Never> {
         self.requestAuthorization(id)
     }
+
+    public func set(
+        id: AnyHashable,
+        unavailabilityReason: Error)
+    -> Effect<Never, Never> {
+        self.set(
+            id,
+            Properties(
+                unavailabilityReason: unavailabilityReason)
+            )
+    }
 }
 
 extension PhotoLibrary {
