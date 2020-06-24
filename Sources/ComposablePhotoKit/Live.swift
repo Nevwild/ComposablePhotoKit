@@ -10,7 +10,6 @@ import Combine
 import ComposableArchitecture
 import Photos
 
-
 extension PhotoLibrary {
 
     public static let live: PhotoLibrary = { () -> PhotoLibrary in
@@ -20,7 +19,6 @@ extension PhotoLibrary {
         library.authorizationStatus = PHPhotoLibrary.authorizationStatus
 
         library.create = { id in
-        library.create { id in
             Effect.run { subscriber in
                 let sharedLibrary = PHPhotoLibrary.shared
 
@@ -41,6 +39,7 @@ extension PhotoLibrary {
                 }
             }
         }
+
         // TODO: build out destroy
         library.destroy = { id in
             .fireAndForget {
@@ -68,7 +67,6 @@ private class PhotoLibraryAvailabilityObserver: NSObject, PHPhotoLibraryAvailabi
         self.subscriber = subscriber
     }
 
-    // TODO:figure out if i need to wrap the photolibrary in a value type
     func photoLibraryDidBecomeUnavailable(_ photoLibrary: PHPhotoLibrary) {
         subscriber.send(.photoLibraryDidBecomeUnavailable(photoLibrary))
     }
