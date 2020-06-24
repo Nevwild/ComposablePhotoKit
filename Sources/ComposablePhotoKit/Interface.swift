@@ -68,6 +68,10 @@ public struct PhotoLibrary {
             )
     }
 }
+    
+    public func requestAuthorization(id: AnyHashable) -> Effect<Never, Never> {
+        self.requestAuthorization(id)
+    }
 
 extension PhotoLibrary {
     public struct Properties:Equatable{
