@@ -35,10 +35,9 @@ public struct PhotoLibrary {
 
     var create: (AnyHashable) -> Effect<Action, Never> = { _ in _unimplemented("create") }
 
-     var destroy: (AnyHashable) -> Effect<Never, Never> = { _ in _unimplemented("destroy") }
+    var destroy: (AnyHashable) -> Effect<Never, Never> = { _ in _unimplemented("destroy") }
 
-    
-    // TODO:
+
     var requestAuthorization: (AnyHashable) -> Effect<Never, Never> = { _ in
         _unimplemented("requestAuthorization")
     }
@@ -59,15 +58,15 @@ public struct PhotoLibrary {
     }
 
     public func create(id: AnyHashable) -> Effect<Action, Never> {
-      self.create(id)
+        self.create(id)
     }
-    
+
     public func destroy(id: AnyHashable) -> Effect<Never, Never> {
-      self.destroy(id)
+        self.destroy(id)
     }
 
     var set: (AnyHashable, Properties) -> Effect<Never, Never> = { _, _ in _unimplemented("set")
-}
+    }
     
     public func requestAuthorization(id: AnyHashable) -> Effect<Never, Never> {
         self.requestAuthorization(id)
@@ -87,43 +86,12 @@ public struct PhotoLibrary {
         self.unregisterAvailabilityObserver(id)
     }
 
+
+}
+
 extension PhotoLibrary {
     public struct Properties:Equatable{
         var unavailabilityReason: Error? = nil
     }
 }
-`
- //
-
- #import <Foundation/Foundation.h>
- #import <Photos/PhotosTypes.h>
-
- NS_ASSUME_NONNULL_BEGIN
- API_AVAILABLE_BEGIN(macos(10.13), ios(8), tvos(10))
-
- @class PHChange;
- @class PHPhotoLibrary;
-
- typedef NS_ENUM(NSInteger, PHAuthorizationStatus) {
- PHAuthorizationStatusNotDetermined = 0, // User has not yet made a choice with regards to this application
- PHAuthorizationStatusRestricted,        // This application is not authorized to access photo data.
- // The user cannot change this application’s status, possibly due to active restrictions
- //   such as parental controls being in place.
- PHAuthorizationStatusDenied,            // User has explicitly denied this application access to photos data.
- PHAuthorizationStatusAuthorized         // User has authorized this application to access photos data.
- };
-
- #pragma mark -
- @protocol PHPhotoLibraryChangeObserver <NSObject>
- // This callback is invoked on an arbitrary serial queue. If you need this to be handled on a specific queue, you should redispatch appropriately
- - (void)photoLibraryDidChange:(PHChange *)changeInstance;
-
- @end
-
- #pragma mark -
- API_AVAILABLE(macos(10.15), ios(13), tvos(13))
- @protocol PHPhotoLibraryAvailabilityObserver <NSObject>
- // This notification is posted on a private queue.
- - (void)photoLibraryDidBecomeUnavailable:(PHPhotoLibrary *)photoLibrary API_AVAILABLE(macos(10.15), ios(13), tvos(13));
- @end
 
