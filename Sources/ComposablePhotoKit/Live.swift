@@ -19,7 +19,7 @@ extension PhotoLibrary {
 
         library.authorizationStatus = PHPhotoLibrary.authorizationStatus
 
-        // TODO: build out create
+        library.create = { id in
         library.create { id in
             Effect.run { subscriber in
                 let library = library.sharedPhotoLibrary
@@ -40,7 +40,7 @@ extension PhotoLibrary {
             }
         }
         // TODO: build out destroy
-        library.destroy { id in
+        library.destroy = { id in
             .fireAndForget {
                 dependencies[id]?.subscriber.send(completion: .finished)
                 dependencies[id] = nil
