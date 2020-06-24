@@ -6,6 +6,7 @@
 //  Copyright © 2020 NevWild. All rights reserved.
 //
 
+import Combine
 import ComposableArchitecture
 import Photos
 
@@ -14,9 +15,9 @@ extension PhotoLibrary {
 
     public static let live: PhotoLibrary = { () -> PhotoLibrary in
 
-        var library = PhotoLibrary()
+        var library:PhotoLibrary = PhotoLibrary()
 
-        library.authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        library.authorizationStatus = PHPhotoLibrary.authorizationStatus
 
         // TODO: build out create
         library.create { id in
@@ -45,6 +46,7 @@ extension PhotoLibrary {
                 dependencies[id] = nil
             }
         }
+        return library
     }()
 }
 private struct Dependencies {
