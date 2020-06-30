@@ -82,7 +82,8 @@ private class PhotoLibraryChangeObserver: NSObject, PHPhotoLibraryChangeObserver
 
     // TODO: create PhotoChange value type for this subscription
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        subscriber.send(.photoLibraryDidChange(changeInstance))
+        subscriber.send(.photoLibraryDidChange(PhotoChange(rawValue: changeInstance))
+        )
     }
 }
 

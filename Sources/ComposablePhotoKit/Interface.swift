@@ -16,7 +16,7 @@ import PhotosUI
 public struct PhotoLibrary {
 
     public enum Action : Equatable {
-        case photoLibraryDidChange(PHChange)
+        case photoLibraryDidChange(PhotoChange)
         case photoLibraryDidBecomeUnavailable(PHPhotoLibrary)
         case performChanges(error: Error)
         case performChangesAndWait(error: Error)
