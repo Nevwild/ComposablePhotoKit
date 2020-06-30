@@ -1,11 +1,3 @@
-//
-//  PhotoChange.swift
-//  RecollMobile
-//
-//  Created by Nevill Wilder on 6/15/20.
-//  Copyright © 2020 NevWild. All rights reserved.
-//
-
 import Photos
 
 /// A value type wrapper for `PHChange`. This type is necessary so that we can do equality checks
@@ -14,21 +6,27 @@ import Photos
 public struct PhotoChange {
 
     public let rawValue: PHChange
-    public var changeDetailsForObject: PhotoObject
-    public var changeDetailsForFetchResult: PHFetchResult<AnyObject>
+
     public init(rawValue: PHChange) {
       self.rawValue = rawValue
-
     }
 
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.changeDetailsForObject == rhs.changeDetailsForObject
-        &&
-
-        lhs.changeDetailsForFetchResult == rhs.changeDetailsForFetchResult
-
+    public func changeDetails(for fetchResult: PhotoFetchResult<AnyObject>) ->  PhotoFetchResultChangeDetails? {
+        guard let details = rawValue.changeDetails(for: fetchResult.rawValue) else { return nil }
+        return PhotoFetchResultChangeDetails(details)
     }
 
-
+    public func changeDetails(for object: PhotoObject) -> PhotoObjectChangeDetails? {
+        guard let changeDetails = rawValue.changeDetails(for: object.rawValue) else { return nil }
+        return PhotoObjectChangeDetails(changeDetails)
+    }
+    
+    public func changeDetails(for fetchResult: PhotoFetchResult<PhotoObject>) -> PhotoFetchResultChangeDetails? {
+        guard let changeDetails = rawValue.changeDetails(for: fetchResult.rawValue) else { return nil }
+        return PhotoFetchResultChangeDetails(changeDetails)
+    }
 
 }
+
+extension PhotoChange: Equatable {}
+

@@ -7,34 +7,54 @@ public struct PhotoFetchResultChangeDetails {
 
     public let rawValue: PHFetchResultChangeDetails<PHObject>
 
-    public init(rawValue: PHFetchResultChangeDetails<PHObject>) {
+    public init(_ rawValue: PHFetchResultChangeDetails<PHObject>) {
         self.rawValue = rawValue
+        self.hasIncrementalChanges = rawValue.hasIncrementalChanges
+        self.removedIndexes = rawValue.removedIndexes
+        self.removedObjects = rawValue.removedObjects
+        self.insertedIndexes = rawValue.insertedIndexes
+        self.insertedObjects = rawValue.insertedObjects
+        self.changedIndexes = rawValue.changedIndexes
+        self.changedObjects = rawValue.changedObjects
+        self.hasMoves = rawValue.hasMoves
     }
 
-    public init(from: PHFetchResult<ObjectType>, to: PHFetchResult<ObjectType>, changedObjects: [ObjectType]) {
-        self.rawValue =  PHFetchResultChangeDetails.init(from: from, to: to, changedObjects: changedObjects)
+    public init(from: PhotoFetchResult<AnyObject>, to: PhotoFetchResult<AnyObject>, changedObjects: [PhotoObject]) {
+
+        self.rawValue = PHFetchResultChangeDetails(from: from.rawValue,
+                                                   to: to.rawValue,
+                                                   changedObjects: changedObjects.map { $0.rawValue}
+        )
+
+        self.hasIncrementalChanges = self.rawValue.hasIncrementalChanges
+        self.removedIndexes = self.rawValue.removedIndexes
+        self.removedObjects = self.rawValue.removedObjects
+        self.insertedIndexes = self.rawValue.insertedIndexes
+        self.insertedObjects = self.rawValue.insertedObjects
+        self.changedIndexes = self.rawValue.changedIndexes
+        self.changedObjects = self.rawValue.changedObjects
+        self.hasMoves = self.rawValue.hasMoves
     }
 
-    var fetchResultBeforeChanges: PHFetchResult<ObjectType> { rawValue.fetchResultBeforeChanges }
-    var fetchResultAfterChanges: PHFetchResult<ObjectType> { rawValue.fetchResultAfterChanges }
+    var fetchResultBeforeChanges: PhotoFetchResult<Any> {
+        PhotoFetchResult(rawValue: rawValue.fetchResultBeforeChanges)
+    }
+    var fetchResultAfterChanges: PhotoFetchResult<Any>{
+        PhotoFetchResult(rawValue: rawValue.fetchResultAfterChanges)
+    }
 
     var hasIncrementalChanges: Bool
-
     var removedIndexes: IndexSet?
-
     var removedObjects: [PHObject]
-
     var insertedIndexes: IndexSet?
-
     var insertedObjects: [PHObject]
-
     var changedIndexes: IndexSet?
-
     var changedObjects: [PHObject]
-
     var hasMoves: Bool
 
-    func enumerateMoves((Int, Int) -> Void)
+    func enumerateMoves(_ moves: @escaping (Int, Int) -> Void) {
+        rawValue.enumerateMoves(moves)
+    }
 
 }
 

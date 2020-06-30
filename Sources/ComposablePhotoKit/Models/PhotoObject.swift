@@ -3,23 +3,16 @@ import Photos
 /// A value type wrapper for `PHObject`. This type is necessary so that we can do equality checks
 /// and write tests against its values.
 
-public struct PhotoObject: Equatable {
+public struct PhotoObject {
 
-    public let rawValue: PHObject?
+    public let rawValue: PHObject
 
     public var localIdentifier: String
 
-    public init(rawValue: PHObject) {
+    public init(_ rawValue: PHObject) {
         self.rawValue = rawValue
         self.localIdentifier = rawValue.localIdentifier
     }
-
-    public init(localIdentifier: String) {
-        self.rawValue = nil
-        self.localIdentifier = localIdentifier
-    }
-
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.localIdentifier == rhs.localIdentifier
-    }
 }
+
+extension PhotoObject: Equatable {}

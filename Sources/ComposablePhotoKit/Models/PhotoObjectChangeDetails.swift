@@ -9,9 +9,9 @@ public struct PhotoObjectChangeDetails {
 
     public init(_ rawValue: PHObjectChangeDetails<PHObject>) {
         self.rawValue = rawValue
-        self.objectBeforeChanges = PhotoObject(rawValue: rawValue.objectBeforeChanges)
+        self.objectBeforeChanges = PhotoObject(rawValue.objectBeforeChanges)
         if let after = rawValue.objectAfterChanges {
-            self.objectAfterChanges = PhotoObject(rawValue: after)
+            self.objectAfterChanges = PhotoObject(after)
         } else {
             self.objectAfterChanges = nil
         }
