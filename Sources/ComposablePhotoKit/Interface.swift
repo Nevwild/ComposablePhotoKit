@@ -16,9 +16,10 @@ import PhotosUI
 public struct PhotoLibrary {
 
     public enum Action : Equatable {
-        // TODO: These are both coming from seperate protocols. Should they be represented by different action enums?
         case photoLibraryDidChange(PHChange)
         case photoLibraryDidBecomeUnavailable(PHPhotoLibrary)
+        case performChanges(error: Error)
+        case performChangesAndWait(error: Error)
     }
 
     public struct Error: Swift.Error, Equatable {
