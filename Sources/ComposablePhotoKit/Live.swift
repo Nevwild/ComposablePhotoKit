@@ -1,11 +1,3 @@
-//
-//  Live.swift
-//  RecollMobile
-//
-//  Created by Nevill Wilder on 6/15/20.
-//  Copyright © 2020 NevWild. All rights reserved.
-//
-
 import Combine
 import ComposableArchitecture
 import Photos
@@ -18,9 +10,11 @@ extension PhotoLibrary {
 
         library.authorizationStatus = PHPhotoLibrary.authorizationStatus
 
+        let sharedLibrary = PHPhotoLibrary.shared
+
         library.create = { id in
             Effect.run { subscriber in
-                let sharedLibrary = PHPhotoLibrary.shared
+
 
                 var availabilityObserver = PhotoLibraryAvailabilityObserver(subscriber)
                 sharedLibrary().register(availabilityObserver)
@@ -43,6 +37,11 @@ extension PhotoLibrary {
         // TODO: build out destroy
         library.destroy = { id in
             .fireAndForget {
+                if let libraryChangeObserver = dependencies[id]?.libraryChangeObserver,
+                   let availabilityObserver = dependencies[id]?.availabilityObserver {
+                    sharedLibrary().unregisterChangeObserver(libraryChangeObserver)
+                    sharedLibrary().unregisterAvailabilityObserver(availabilityObserver)
+                }
                 dependencies[id]?.subscriber.send(completion: .finished)
                 dependencies[id] = nil
             }
